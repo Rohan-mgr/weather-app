@@ -1,23 +1,35 @@
-export async function getCoordinates(cityName) {
-  try {
-    let response = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=80514d89abfbae865491be2e2d570c7f`
-    );
-    if (response?.status !== 200 || response?.statusText !== "OK") {
-      throw new Error("Failed to forecast weather");
-    }
-    let data = response?.data[0];
-    let geoInfo = {
-      country: data.country,
-      lat: data.lat,
-      lon: data.lon,
-      name: data.name,
-    };
+export function formatDate(date) {
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
 
-    console.log(response, "geo coding response");
-    return geoInfo;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+  return date.toLocaleString("en-US", options);
+}
+
+export function formatTime(dateString) {
+  const date = new Date(dateString);
+
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  // Convert 24-hour time to 12-hour time
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+
+  return `${hours}:${minutes} ${ampm}`;
+}
+
+export function formatUnixTimestamp(unixTimestamp) {
+  const date = new Date(unixTimestamp * 1000); // Multiply by 1000 to convert seconds to milliseconds
+  const hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const ampm = hours >= 12 ? "PM" : "AM";
+  const formattedHours = hours % 12 || 12; // Convert 24-hour time to 12-hour time
+  return `${formattedHours}:${minutes} ${ampm}`;
 }

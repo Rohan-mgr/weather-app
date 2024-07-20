@@ -4,12 +4,162 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link rel="stylesheet" href="./style.css" />
+    <!-- font awesome v6 cdn link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- axios cdn link -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <h1>Weather App</h1>
-    <h2></h2>
-    <p></p>
+    <div class="container">
+      <div class="container__left">
+        <div class="current__weather">
+          <form class="search__bar">
+            <input
+              type="text"
+              name="location"
+              id="location"
+              placeholder="Search by city name, country, state ..."
+            />
+            <button type="submit">
+              <i class="fa-duotone fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+          <div class="weather__img__wrapper">
+            <img src="./assets/cloud.png" alt="cloud-pic" />
+          </div>
+          <h1 id="default_weather__details">0 &deg;C</h1>
+          <p id="default_weather_description"></p>
+          <hr />
+          <p>
+            <i class="fa-solid fa-location-dot"></i> <span id="country"></span>
+          </p>
+          <p class="date__wrapper">
+            <i class="fa-solid fa-calendar-days"> <span id="date"></span></i>
+          </p>
+        </div>
+        <div class="weather__forecast">
+          <h2>Today's Hourly Forecasts</h2>
+          <div class="forecast__list">
+            <div class="tomorrow__forecaset__wrapper"></div>
+            <div class="each__forecast__wrapper"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container__right">
+        <div class="todays__highlight">
+          <div class="todays__highlight__up">
+            <p>Today's Highlight</p>
+            <div class="cards__wrapper">
+              <div class="cards__wrapper__up">
+                <div class="card">
+                  <p>Wind Status</p>
+                  <img src="./assets/wind.png" alt="wind" />
+                  <div class="card__content">
+                    <h1 id="windState">0</h1>
+                    <span>km/h</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <p>Max Temp</p>
+                  <img src="./assets/meter.png" alt="meter" />
+                  <div class="card__content">
+                    <h1 id="maxTemp">0</h1>
+                    <span>&deg;C</span>
+                  </div>
+                </div>
+                <div class="card">
+                  <p>Sunrise & Sunset</p>
+                  <img src="./assets/sunny.webp" alt="sunrise" />
+                  <div class="card__content__secondary">
+                    <p id="sunrise">0:00 AM</p>
+                    <p id="sunset">0:00 PM</p>
+                  </div>
+                </div>
+              </div>
+              <div class="cards__wrapper__up">
+                <div class="small__card">
+                  <div>
+                    <p>Humidity</p>
+                    <div class="card__content self">
+                      <h1 id="humidity">0</h1>
+                      <span>%</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p>
+                      <i class="fa-solid fa-droplet" style="color: #f0f2f4"></i>
+                    </p>
+                    <p>The Humidity effects feels like temperature</p>
+                  </div>
+                </div>
+                <div class="small__card">
+                  <div>
+                    <p>Visibility</p>
+                    <div class="card__content self">
+                      <h1 id="visibility">0</h1>
+                      <span>km</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p>
+                      <i class="fa-regular fa-eye" style="color: #f0f2f4"></i>
+                    </p>
+                    <p>Haze is slightly affecting the visibility</p>
+                  </div>
+                </div>
+                <div class="small__card">
+                  <div>
+                    <p>Feels Like</p>
+                    <div class="card__content self">
+                      <h1>
+                        <span
+                          ><i
+                            class="fa-solid fa-temperature-empty"
+                            style="color: #f0f2f4"
+                          ></i></span
+                        ><span id="feelsLike">0</span>
+                      </h1>
+                      <span>&deg;C</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p>
+                      <i class="fa-solid fa-sun" style="color: #f0f2f4"></i>
+                    </p>
+                    <p>The Humidity is making it feel hotter</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todays__highlight__down"></div>
+        </div>
+        <h2>Weather Heat Map</h2>
+        <div class="weather__map">
+          <img
+            src="https://tile.openweathermap.org/map/temp_new/2/2/2.png?appid=80514d89abfbae865491be2e2d570c7f"
+            alt="heat-map"
+          />
+        </div>
+      </div>
+    </div>
     <!-- axios cdn link -->
     <script type="module" src="./script.js" defer></script>
   </body>
