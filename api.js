@@ -95,7 +95,9 @@ export async function getweatherForeCasts(cityName = "chabahil") {
                 <p>${data.list[0].weather[0].description}</p>
               </div>
               <div>
-              <img src='./assets/graph.png' alt="graph" style="width:auto; height: 60px" />
+              <div class="graph__img__wrapper">  
+              <img src='./assets/graph.png' alt="graph" />
+              </div>
             </div>`;
   } catch (error) {
     console.log(error);

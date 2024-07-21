@@ -6,7 +6,8 @@
 }
 
 .container {
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   background: #000000;
   width: 100%;
   display: flex;
@@ -66,6 +67,13 @@
   gap: 10px;
 }
 
+.graph__img__wrapper img {
+  width: 100%;
+  height: auto;
+  object-position: center;
+  object-fit: cover;
+}
+
 #date,
 #country {
   margin-left: 10px;
@@ -107,9 +115,16 @@
   outline: none;
   cursor: pointer;
 }
+.current__weather button:hover {
+  background-color: #ccc;
+}
+
 .current__weather button .fa-magnifying-glass {
   font-size: 1.2rem;
   color: #fff;
+}
+.current__weather button:hover .fa-magnifying-glass {
+  color: #000;
 }
 
 .weather__forecast {
@@ -223,6 +238,7 @@
 .cards__wrapper__up {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-bottom: 20px;
 }
@@ -308,4 +324,34 @@
 .weather__map img {
   width: 100%;
   height: 100%;
+}
+
+@media screen and (max-width: 1064px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+  .container__left,
+  .container__right {
+    flex: 1;
+  }
+
+  .cards__wrapper__up {
+    flex-direction: column;
+  }
+
+  .cards__wrapper__up .card > img {
+    max-width: 290px;
+  }
+
+  .card {
+    width: 100%;
+  }
+  .card > img {
+    margin: 0 auto;
+  }
+  .small__card {
+    gap: 10px;
+    width: 100%;
+  }
 }
