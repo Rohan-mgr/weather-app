@@ -2,6 +2,15 @@ import { formatDate, formatTime, formatUnixTimestamp } from "./helper.js";
 
 axios.defaults.baseURL = "https://api.openweathermap.org/data/2.5/";
 
+let loader = document.querySelector(".loader");
+
+function showLoader() {
+  loader.classList.add("show");
+}
+function hideLoader() {
+  loader.classList.remove("show");
+}
+
 export async function getCoordinates(cityName) {
   try {
     let response = await axios.get(
@@ -12,7 +21,6 @@ export async function getCoordinates(cityName) {
     }
     let data = response?.data[0];
     let geoInfo = {
-      // country: data.country,
       lat: data.lat,
       lon: data.lon,
       name: data.name,
@@ -26,29 +34,12 @@ export async function getCoordinates(cityName) {
   }
 }
 
-// export async function getWeatherMap() {
-//   let weatherMap = document.querySelector(".weather__map");
-//   try {
-//     let response = await axios.get(
-//       `https://tile.openweathermap.org/map/temp_new/2/2/2.png?appid=80514d89abfbae865491be2e2d570c7f`
-//     );
-//     if (response?.status !== 200 || response?.statusText !== "OK") {
-//       throw new Error("Failed to forecast weather");
-//     }
-
-//     console.log(response, "geo coding response");
-//     weatherMap.innerHTML = `<img src='https://tile.openweathermap.org/map/temp_new/2/2/2.png?appid=80514d89abfbae865491be2e2d570c7f' alt="temp-map" />`;
-//   } catch (error) {
-//     console.log(error);
-//     throw error;
-//   }
-// }
-
 export async function getweatherForeCasts(cityName = "chabahil") {
   let forecastWrapper = document.querySelector(".each__forecast__wrapper");
   let tommorrowForecast = document.querySelector(
     ".tomorrow__forecaset__wrapper"
   );
+  showLoader();
   try {
     let { lat, lon, name } = await getCoordinates(cityName);
     let response = await axios.get(
@@ -102,6 +93,8 @@ export async function getweatherForeCasts(cityName = "chabahil") {
   } catch (error) {
     console.log(error);
     throw error;
+  } finally {
+    hideLoader();
   }
 }
 
@@ -122,6 +115,7 @@ export async function getCurrentWeather(cityName = "chabahil") {
   let visibility = document.querySelector("#visibility");
   let feelsLike = document.querySelector("#feelsLike");
 
+  showLoader();
   try {
     let { lat, lon, name } = await getCoordinates(cityName);
     let response = await axios.get(
@@ -151,5 +145,7 @@ export async function getCurrentWeather(cityName = "chabahil") {
   } catch (error) {
     console.log(error.message);
     throw error;
+  } finally {
+    hideLoader();
   }
 }

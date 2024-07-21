@@ -1,14 +1,7 @@
-import {
-  getCurrentWeather,
-  // getWeatherMap,
-  getweatherForeCasts,
-} from "./api.js";
-
-let p = document.querySelector("p");
+import { getCurrentWeather, getweatherForeCasts } from "./api.js";
 
 getCurrentWeather();
 getweatherForeCasts();
-// getWeatherMap();
 
 let searchForm = document.querySelector(".search__bar");
 let searchInput = document.querySelector("#location");
